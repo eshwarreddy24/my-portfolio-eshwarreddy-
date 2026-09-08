@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+@theme {
+  /* Dark catalog palette — Codecademy-inspired: near-black blue-tinted
+     surfaces, light text, one violet accent. */
+  --color-paper: #0e0e12;
+  --color-card: #16161d;
+  --color-card-2: #1d1d26;
+  --color-ink: #f2f2f7;
+  --color-ink-soft: #b9b9c6;
+  --color-ink-faint: #7d7d8c;
+  --color-line: #26262f;
+  --color-line-strong: #34343f;
+  --color-accent: #7c3aed;
+  --color-accent-deep: #a78bfa;
+  --color-accent-soft: #241e38;
+  --color-accent-soft-2: #2b2444;
+
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    var(--font-plex), ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+
+  --shadow-card:
+    0 1px 2px rgb(0 0 0 / 0.35), 0 10px 30px -14px rgb(0 0 0 / 0.55);
+  --shadow-card-hover:
+    0 2px 8px rgb(0 0 0 / 0.5), 0 24px 52px -20px rgb(139 92 246 / 0.35);
+  --shadow-panel:
+    0 1px 2px rgb(0 0 0 / 0.3), 0 28px 64px -28px rgb(0 0 0 / 0.65);
+  --shadow-nav: 0 1px 0 rgb(255 255 255 / 0.06), 0 10px 30px -18px rgb(0 0 0 / 0.7);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    /* Reveal transforms briefly extend the scrollable area mid-animation;
+       clip removes any transient horizontal scroll without affecting
+       fixed/sticky positioning (unlike overflow-x: hidden). */
+    overflow-x: clip;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* Accessible skip link */
+  .skip-link {
+    @apply sr-only;
+  }
+  .skip-link:focus {
+    @apply not-sr-only;
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    background: var(--color-accent);
+    color: #ffffff;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+}
+
+@utility page-container {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+
+@utility bg-dots {
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@utility bg-grid-faint {
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* Codecademy-style ambient hero orbs — slow drifting gradient blobs.
+   Paused via animation-play-state from the hero control; killed entirely
+   by the prefers-reduced-motion override at the bottom of this file. */
+@keyframes orb-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(3vw, -3vh, 0) scale(1.12);
+  }
+}
+
+@keyframes orb-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-4vw, 3vh, 0) scale(0.94);
+  }
+}
+
+@keyframes orb-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.96);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate3d(2.5vw, 2.5vh, 0) scale(1.08);
+    opacity: 0.75;
+  }
+}
+
+.orb-anim-a {
+  animation: orb-a 18s ease-in-out infinite;
+}
+
+.orb-anim-b {
+  animation: orb-b 22s ease-in-out infinite;
+}
+
+.orb-anim-c {
+  animation: orb-c 15s ease-in-out infinite;
+}
+
+/* Pause control: animation-play-state does not inherit, so target the
+   animated orbs through the container class. */
+.hero-orbs-paused .orb-anim-a,
+.hero-orbs-paused .orb-anim-b,
+.hero-orbs-paused .orb-anim-c {
+  animation-play-state: paused;
+}
+
+/* Tabular figures for data-heavy content */
+@utility tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle vertical rule used in hero / section eyebrows */
+@utility eyebrow-rule {
+  @apply inline-block h-px w-8 bg-accent align-middle;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
