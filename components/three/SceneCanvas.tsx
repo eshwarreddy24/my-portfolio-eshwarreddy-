@@ -3,13 +3,14 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
-import { useIsMobile } from "@/lib/hooks";
+import { useIsMobile, useTheme } from "@/lib/hooks";
 import { ControlNetwork } from "./ControlNetwork";
 import { CameraRig } from "./CameraRig";
 import { SceneLighting } from "./SceneLighting";
 
 export default function SceneCanvas() {
   const isMobile = useIsMobile(768);
+  const { theme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(true);
   const [visible, setVisible] = useState(false);
@@ -50,11 +51,11 @@ export default function SceneCanvas() {
         camera={{ position: [0, 0, 11], fov: 42 }}
         style={{ position: "absolute", inset: 0 }}
       >
-        <color attach="background" args={["#0e0e12"]} />
-        <fog attach="fog" args={["#0e0e12", 13, 24]} />
+        <color attach="background" args={[theme === "dark" ? "#0b1120" : "#fff6ed"]} />
+        <fog attach="fog" args={[theme === "dark" ? "#0b1120" : "#fff6ed", 13, 24]} />
         <Suspense fallback={null}>
-          <SceneLighting />
-          <ControlNetwork quality={isMobile ? "mobile" : "desktop"} />
+          <SceneLighting dark={theme === "dark"} />
+          <ControlNetwork quality={isMobile ? "mobile" : "desktop"} dark={theme === "dark"} />
           <CameraRig enabled={!isMobile} />
           {!isMobile && (
             <EffectComposer>

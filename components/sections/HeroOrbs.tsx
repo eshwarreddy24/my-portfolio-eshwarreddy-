@@ -40,7 +40,7 @@ export default function HeroOrbs() {
               "orb-anim-a",
               "size-[34rem] sm:size-[40rem]",
               "-right-[12%] -top-[18%]",
-              "radial-gradient(circle at 32% 30%, rgb(139 92 246 / 0.34), rgb(139 92 246 / 0.08) 55%, transparent 72%)"
+              "radial-gradient(circle at 32% 30%, rgb(6 95 70 / 0.13), rgb(6 95 70 / 0.04) 55%, transparent 72%)"
             )}
           </motion.div>
           <motion.div style={prefersReduced ? undefined : { y: orbB }}>
@@ -48,7 +48,7 @@ export default function HeroOrbs() {
               "orb-anim-b",
               "size-[26rem] sm:size-[32rem]",
               "-bottom-[22%] left-[8%]",
-              "radial-gradient(circle at 60% 40%, rgb(99 102 241 / 0.3), rgb(99 102 241 / 0.07) 55%, transparent 72%)"
+              "radial-gradient(circle at 60% 40%, rgb(16 118 84 / 0.11), rgb(16 118 84 / 0.03) 55%, transparent 72%)"
             )}
           </motion.div>
           <motion.div style={prefersReduced ? undefined : { y: orbC }}>
@@ -56,7 +56,7 @@ export default function HeroOrbs() {
               "orb-anim-c",
               "size-[18rem] sm:size-[22rem]",
               "right-[22%] top-[30%]",
-              "radial-gradient(circle at 45% 45%, rgb(217 70 239 / 0.22), rgb(217 70 239 / 0.05) 55%, transparent 72%)"
+              "radial-gradient(circle at 45% 45%, rgb(255 211 0 / 0.16), rgb(255 211 0 / 0.04) 55%, transparent 72%)"
             )}
           </motion.div>
         </div>

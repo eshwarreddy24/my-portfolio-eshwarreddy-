@@ -1,36 +1,100 @@
 @import "tailwindcss";
 
-@theme {
-  /* Dark catalog palette — Codecademy-inspired: near-black blue-tinted
-     surfaces, light text, one violet accent. */
-  --color-paper: #0e0e12;
-  --color-card: #16161d;
-  --color-card-2: #1d1d26;
-  --color-ink: #f2f2f7;
-  --color-ink-soft: #b9b9c6;
-  --color-ink-faint: #7d7d8c;
-  --color-line: #26262f;
-  --color-line-strong: #34343f;
-  --color-accent: #7c3aed;
-  --color-accent-deep: #a78bfa;
-  --color-accent-soft: #241e38;
-  --color-accent-soft-2: #2b2444;
+/* Class-based dark mode (toggle adds/removes .dark on <html>). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Runtime theme variables. Semantic tokens flip here; every component styles
+   against the Tailwind token names (bg-paper, text-ink, bg-accent, …) which
+   reference these via @theme inline below.
+
+   Light: Codecademy-style warm beige canvas, white cards, navy ink.
+   Dark:  deep navy-charcoal canvas derived from the same navy brand ink.
+   Accent: dark green (both modes) — deep enough for white-on-green AA text.
+--------------------------------------------------------------------------- */
+:root {
+  --paper: #fff6ed;
+  --card: #ffffff;
+  --card-2: #fdf3e7;
+  --ink: #10162f;
+  --ink-soft: rgb(16 22 47 / 0.75);
+  --ink-faint: rgb(16 22 47 / 0.47);
+  --line: #10162f;
+  --line-strong: #000000;
+  --dot: rgb(16 22 47 / 0.07);
+  --grid: rgb(16 22 47 / 0.05);
+
+  --accent: #065f46; /* dark pine green — white text passes AA (7.6:1) */
+  --accent-strong: #04422f; /* hover/pressed backgrounds */
+  --accent-deep: #04422f; /* accent as foreground text */
+  --accent-soft: #d9efe4; /* tinted chip surface */
+  --accent-soft-2: #ecf7f0;
+
+  --sh-card:
+    0 1px 2px rgb(16 22 47 / 0.06), 0 8px 24px -12px rgb(16 22 47 / 0.14);
+  --sh-card-hover: 6px 6px 0 0 rgb(16 22 47 / 0.85);
+  --sh-panel:
+    0 1px 2px rgb(16 22 47 / 0.05), 0 24px 48px -20px rgb(16 22 47 / 0.18);
+  --sh-nav:
+    0 1px 0 rgb(16 22 47 / 0.07), 0 8px 24px -12px rgb(16 22 47 / 0.12);
+}
+
+.dark {
+  --paper: #0b1120;
+  --card: #111a2e;
+  --card-2: #17223a;
+  --ink: #eef2fa;
+  --ink-soft: rgb(238 242 250 / 0.72);
+  --ink-faint: rgb(238 242 250 / 0.48);
+  --line: #263149;
+  --line-strong: #8fa0c0;
+  --dot: rgb(238 242 250 / 0.08);
+  --grid: rgb(238 242 250 / 0.06);
+
+  --accent: #12805c; /* white text still passes AA (5:1) on green */
+  --accent-strong: #0c6b4d;
+  --accent-deep: #4cd6a4; /* bright mint for text on dark surfaces */
+  --accent-soft: #12312a;
+  --accent-soft-2: #0f2a23;
+
+  --sh-card:
+    0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.5);
+  --sh-card-hover:
+    0 0 0 1px var(--line), 0 14px 34px -12px rgb(0 0 0 / 0.65);
+  --sh-panel:
+    0 1px 2px rgb(0 0 0 / 0.35), 0 24px 48px -20px rgb(0 0 0 / 0.55);
+  --sh-nav:
+    0 1px 0 rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.45);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-soft-2: var(--accent-soft-2);
+  --color-brand-yellow: #ffd300; /* Codecademy brand yellow — mode-independent */
 
   --font-sans:
     var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-mono:
-    var(--font-plex), ui-monospace, SFMono-Regular, Menlo, Consolas,
-    monospace;
+    var(--font-plex), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --shadow-card:
-    0 1px 2px rgb(0 0 0 / 0.35), 0 10px 30px -14px rgb(0 0 0 / 0.55);
-  --shadow-card-hover:
-    0 2px 8px rgb(0 0 0 / 0.5), 0 24px 52px -20px rgb(139 92 246 / 0.35);
-  --shadow-panel:
-    0 1px 2px rgb(0 0 0 / 0.3), 0 28px 64px -28px rgb(0 0 0 / 0.65);
-  --shadow-nav: 0 1px 0 rgb(255 255 255 / 0.06), 0 10px 30px -18px rgb(0 0 0 / 0.7);
+  --shadow-card: var(--sh-card);
+  --shadow-card-hover: var(--sh-card-hover);
+  --shadow-panel: var(--sh-panel);
+  --shadow-nav: var(--sh-nav);
 }
 
 @layer base {
@@ -58,7 +122,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-accent-deep);
     outline-offset: 3px;
     border-radius: 3px;
   }
@@ -87,18 +151,18 @@
 }
 
 @utility bg-dots {
-  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 
 @utility bg-grid-faint {
   background-image:
-    linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
   background-size: 44px 44px;
 }
 
-/* Codecademy-style ambient hero orbs — slow drifting gradient blobs.
+/* Ambient hero orbs — slow drifting gradient blobs (Codecademy-style).
    Paused via animation-play-state from the hero control; killed entirely
    by the prefers-reduced-motion override at the bottom of this file. */
 @keyframes orb-a {
@@ -158,9 +222,9 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Subtle vertical rule used in hero / section eyebrows */
+/* Signature yellow rule used in hero / section eyebrows */
 @utility eyebrow-rule {
-  @apply inline-block h-px w-8 bg-accent align-middle;
+  @apply inline-block h-px w-8 bg-brand-yellow align-middle;
 }
 
 @media (prefers-reduced-motion: reduce) {

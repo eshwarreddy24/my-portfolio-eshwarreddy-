@@ -92,8 +92,14 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0e0e12",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fff6ed" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b1120" },
+  ],
 };
+
+/** Sets the .dark class before first paint; avoids any flash of wrong theme. */
+const themeInit = `(function(){try{var t=localStorage.getItem("theme");var d=window.matchMedia("(prefers-color-scheme: dark)").matches;if(t==="dark"||(!t&&d))document.documentElement.classList.add("dark")}catch(e){}})()`;
 
 export default function RootLayout({
   children,
@@ -101,6 +107,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${spaceGrotesk.variable} ${plex.variable}`}
     >
       <head>
@@ -108,6 +115,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body>
         <a href="#main" className="skip-link">

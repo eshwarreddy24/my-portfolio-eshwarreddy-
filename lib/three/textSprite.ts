@@ -15,7 +15,7 @@ interface LabelOptions {
  */
 export function makeLabelSprite({
   text,
-  color = "#e9e8f2",
+  color = "#10162f",
   background = null,
   fontSize = 44,
   height,

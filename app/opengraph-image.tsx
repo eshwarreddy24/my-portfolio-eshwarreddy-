@@ -16,7 +16,7 @@ export default function OgImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           background:
-            "radial-gradient(42rem 26rem at 85% -10%, rgba(139,92,246,0.35), transparent 60%), radial-gradient(30rem 20rem at 0% 0%, rgba(99,102,241,0.22), transparent 60%), #0e0e12",
+            "radial-gradient(42rem 26rem at 85% -10%, rgba(6,95,70,0.12), transparent 60%), #fff6ed",
           padding: "72px 80px",
           fontFamily: "sans-serif",
         }}
@@ -27,41 +27,41 @@ export default function OgImage() {
               width: 44,
               height: 44,
               borderRadius: 12,
-              background: "#8B5CF6",
+              background: "#065f46",
             }}
           />
-          <div style={{ fontSize: 26, color: "#b9b9c6", letterSpacing: 3 }}>
+          <div style={{ fontSize: 26, color: "rgba(16,22,47,0.75)", letterSpacing: 3 }}>
             OPERATIONS &amp; CONTROLS
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 64, fontWeight: 700, color: "#f2f2f7" }}>
+          <div style={{ fontSize: 64, fontWeight: 700, color: "#10162f" }}>
             {siteConfig.name}
           </div>
           <div
             style={{
               marginTop: 18,
               fontSize: 30,
-              color: "#a78bfa",
+              color: "#065f46",
               fontWeight: 600,
             }}
           >
             Financial Analysis · Reconciliation · Process Improvement
           </div>
-          <div style={{ marginTop: 26, fontSize: 26, color: "#b9b9c6" }}>
+          <div style={{ marginTop: 26, fontSize: 26, color: "rgba(16,22,47,0.75)" }}>
             SAP MM-based reconciliation · procurement controls · Advanced
             Excel · statutory payment analysis
           </div>
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-          <div style={{ fontSize: 24, color: "#b9b9c6" }}>{siteConfig.location}</div>
+          <div style={{ fontSize: 24, color: "rgba(16,22,47,0.75)" }}>{siteConfig.location}</div>
           <div
             style={{
               fontSize: 20,
               color: "#ffffff",
-              background: "#8B5CF6",
+              background: "#065f46",
               padding: "12px 26px",
               borderRadius: 999,
             }}

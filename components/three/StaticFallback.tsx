@@ -3,7 +3,8 @@
 /**
  * Decorative, fully static network graphic. Used as a graceful fallback
  * when WebGL is unavailable or when the user prefers reduced motion.
- * No animation, no JavaScript cost.
+ * No animation, no JavaScript cost. Colors come from the same CSS variables
+ * as the page, so it adapts to light/dark mode automatically.
  */
 export default function StaticFallback() {
   const satellites: Array<[number, number, string]> = [
@@ -27,8 +28,8 @@ export default function StaticFallback() {
     >
       <defs>
         <radialGradient id="sf-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.22" />
-          <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+          <stop offset="0%" stopColor="rgb(6 95 70)" stopOpacity="0.16" />
+          <stop offset="100%" stopColor="rgb(6 95 70)" stopOpacity="0" />
         </radialGradient>
       </defs>
 
@@ -41,11 +42,11 @@ export default function StaticFallback() {
             y1="345"
             x2={x}
             y2={y}
-            stroke="#8b5cf6"
+            stroke="rgb(6 95 70)"
             strokeOpacity="0.22"
             strokeWidth="1.2"
           />
-          <circle cx={x} cy={y} r="4.5" fill="#8b5cf6" fillOpacity="0.55" />
+          <circle cx={x} cy={y} r="4.5" fill="rgb(6 95 70)" fillOpacity="0.55" />
           <text
             x={x}
             y={y - 14}
@@ -53,7 +54,7 @@ export default function StaticFallback() {
             fontSize="13"
             fontFamily="Arial, Helvetica, sans-serif"
             fontWeight="600"
-            fill="#e9e8f2"
+            fill="var(--ink)"
             fillOpacity="0.72"
           >
             {label}
@@ -61,8 +62,8 @@ export default function StaticFallback() {
         </g>
       ))}
 
-      <circle cx="560" cy="345" r="26" fill="#8b5cf6" />
-      <circle cx="560" cy="345" r="11" fill="#0e0e12" />
+      <circle cx="560" cy="345" r="26" fill="#065f46" />
+      <circle cx="560" cy="345" r="11" fill="var(--paper)" />
       <text
         x="560"
         y="312"
@@ -70,7 +71,7 @@ export default function StaticFallback() {
         fontSize="13.5"
         fontWeight="700"
         letterSpacing="1.5"
-        fill="#f2f2f7"
+        fill="var(--ink)"
       >
         OPERATIONS &amp; CONTROLS
       </text>

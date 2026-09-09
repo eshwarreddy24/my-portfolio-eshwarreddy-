@@ -17,10 +17,12 @@ function Node({
   label,
   position,
   kind,
+  dark,
 }: {
   label: string;
   position: [number, number, number];
   kind: "center" | "satellite";
+  dark: boolean;
 }) {
   const sprite = useMemo(
     () =>
@@ -28,15 +30,18 @@ function Node({
         text: label,
         height: kind === "center" ? LABEL_HEIGHT.center : LABEL_HEIGHT.satellite,
         fontSize: kind === "center" ? 50 : 42,
-        color: kind === "center" ? "#ffffff" : "#e9e8f2",
-        background: kind === "center" ? "#8b5cf6" : null,
+        color: kind === "center" ? "#ffffff" : dark ? "#dfe6f2" : "#10162f",
+        background: kind === "center" ? (dark ? "#0c6b4d" : "#065f46") : null,
       }),
-    [label, kind]
+    [label, kind, dark]
   );
 
   const halo = useMemo(
-    () => (kind === "center" ? makeHaloSprite(3.6, "139,92,246") : null),
-    [kind]
+    () =>
+      kind === "center"
+        ? makeHaloSprite(3.6, dark ? "47,189,143" : "6,95,70")
+        : null,
+    [kind, dark]
   );
 
   return (
@@ -47,8 +52,8 @@ function Node({
           args={[kind === "center" ? 0.34 : 0.145, 1]}
         />
         <meshStandardMaterial
-          color={kind === "center" ? "#8b5cf6" : "#45455a"}
-          emissive="#8b5cf6"
+          color={kind === "center" ? (dark ? "#2fbd8f" : "#065f46") : dark ? "#9fb0cd" : "#3b4252"}
+          emissive={dark ? "#2fbd8f" : "#065f46"}
           emissiveIntensity={kind === "center" ? 0.85 : 0.4}
           roughness={0.32}
           metalness={0.15}
@@ -62,7 +67,13 @@ function Node({
   );
 }
 
-export function ControlNetwork({ quality }: { quality: Quality }) {
+export function ControlNetwork({
+  quality,
+  dark,
+}: {
+  quality: Quality;
+  dark: boolean;
+}) {
   const mobile = quality === "mobile";
   const group = useRef<THREE.Group>(null);
   const lineMaterial = useRef<THREE.LineBasicMaterial>(null);
@@ -98,7 +109,7 @@ export function ControlNetwork({ quality }: { quality: Quality }) {
         </bufferGeometry>
         <lineBasicMaterial
           ref={lineMaterial}
-          color="#8b5cf6"
+          color={dark ? "#2fbd8f" : "#065f46"}
           transparent
           opacity={0.32}
         />
@@ -109,9 +120,10 @@ export function ControlNetwork({ quality }: { quality: Quality }) {
           label={node.label}
           position={node.position}
           kind={node.kind}
+          dark={dark}
         />
       ))}
-      <Particles count={particleCount} />
+      <Particles count={particleCount} dark={dark} />
     </group>
   );
 }

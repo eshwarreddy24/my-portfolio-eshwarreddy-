@@ -7,9 +7,10 @@ Operations, and Process Improvement roles.
 Built with **Next.js (App Router)**, **React 19**, **TypeScript**, **Tailwind
 CSS v4**, **Framer Motion**, and a restrained **React Three Fiber** hero scene.
 
-The visual language follows a dark catalog style inspired by Codecademy's
-projects page — near-black blue-tinted surfaces, light text, one violet accent,
-and gradient thumbnail graphics on the case-study cards.
+The visual language follows the classic light Codecademy projects catalog:
+cream background, white cards with thin near-black borders, dark navy ink, one
+indigo accent, mono uppercase card labels, and a hard offset drop-shadow on
+card hover.
 
 ## Tech stack
 

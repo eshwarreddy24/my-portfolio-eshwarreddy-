@@ -141,13 +141,13 @@ export default function DashboardDemo() {
           <h4 className="text-sm font-semibold text-ink">Processing status</h4>
           <div className="mt-2 flex items-center gap-5">
             <svg width="132" height="132" viewBox="0 0 132 132" role="img" aria-label={`${metrics.processed} processed, ${metrics.pending} pending`}>
-              <circle cx="66" cy="66" r={donutR} fill="none" stroke="#26262f" strokeWidth="20" />
+              <circle cx="66" cy="66" r={donutR} fill="none" className="stroke-line/40" strokeWidth="20" />
               <motion.circle
                 cx="66"
                 cy="66"
                 r={donutR}
                 fill="none"
-                stroke="#8b5cf6"
+                className="stroke-accent"
                 strokeWidth="20"
                 strokeLinecap="round"
                 strokeDasharray={donutC}
@@ -160,7 +160,7 @@ export default function DashboardDemo() {
               <text x="66" y="61" textAnchor="middle" className="fill-ink font-mono" fontSize="16" fontWeight="600">
                 {metrics.processed}
               </text>
-              <text x="66" y="78" textAnchor="middle" fill="#7d7d8c" fontSize="9">
+              <text x="66" y="78" textAnchor="middle" fill="rgb(16 22 47 / 0.47)" fontSize="9">
                 of {metrics.total} processed
               </text>
             </svg>

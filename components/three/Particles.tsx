@@ -9,6 +9,7 @@ import * as THREE from "three";
 
 interface ParticlesProps {
   count: number;
+  dark: boolean;
 }
 
 function randomInShell(min: number, max: number): [number, number, number] {
@@ -38,7 +39,7 @@ function randomInCore(): [number, number, number] {
  * organise into a compact cluster around the control network — a quiet
  * visual metaphor for data → validation → control → structured output.
  */
-export function Particles({ count }: ParticlesProps) {
+export function Particles({ count, dark }: ParticlesProps) {
   const pointsRef = useRef<THREE.Points>(null);
   const settled = useRef(false);
   const initialized = useRef(false);
@@ -103,7 +104,7 @@ export function Particles({ count }: ParticlesProps) {
       </bufferGeometry>
       <pointsMaterial
         size={0.055}
-        color="#8b5cf6"
+        color={dark ? "#3fcaa0" : "#065f46"}
         transparent
         opacity={0.5}
         sizeAttenuation

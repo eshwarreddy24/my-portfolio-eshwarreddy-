@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { siteConfig } from "@/data/siteConfig";
-import { useActiveSection } from "@/lib/hooks";
+import { useActiveSection, useTheme } from "@/lib/hooks";
 import { Icon } from "@/components/ui/icons";
 
 const SECTION_IDS = ["about", "experience", "case-studies", "skills", "certifications", "resume", "contact"];
@@ -13,6 +13,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const active = useActiveSection(SECTION_IDS);
+  const { theme, toggle } = useTheme();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -74,7 +75,7 @@ export default function Navbar() {
                   className={`group rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
                     isActive
                       ? "bg-accent-soft text-accent-deep"
-                      : "text-ink-soft hover:bg-paper hover:text-ink"
+                      : "text-ink-soft hover:bg-card hover:text-ink"
                   }`}
                 >
                   <span className="relative">
@@ -90,11 +91,20 @@ export default function Navbar() {
           })}
         </ul>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-2 lg:flex">
+          <button
+            type="button"
+            onClick={toggle}
+            aria-pressed={theme === "dark"}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className="flex size-9 items-center justify-center rounded-full border border-line bg-card text-ink transition-colors hover:border-accent hover:text-accent-deep"
+          >
+            <Icon name={theme === "dark" ? "sun" : "moon"} className="size-4" />
+          </button>
           <a
             href={siteConfig.resume}
             download="Gali-Eshwar-Reddy-Resume.pdf"
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-deep"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
           >
             <Icon name="download" className="size-4" />
             Resume
@@ -139,12 +149,21 @@ export default function Navbar() {
                   </a>
                 </li>
               ))}
-              <li className="mt-3 px-3 pb-2">
+              <li className="flex gap-2 px-3 pb-2">
+                <button
+                  type="button"
+                  onClick={toggle}
+                  aria-pressed={theme === "dark"}
+                  aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                  className="flex size-11 shrink-0 items-center justify-center rounded-full border border-line bg-card text-ink transition-colors hover:border-accent hover:text-accent-deep"
+                >
+                  <Icon name={theme === "dark" ? "sun" : "moon"} className="size-4" />
+                </button>
                 <a
                   href={siteConfig.resume}
                   download="Gali-Eshwar-Reddy-Resume.pdf"
                   onClick={close}
-                  className="flex items-center justify-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-deep"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
                 >
                   <Icon name="download" className="size-4" />
                   Download Resume

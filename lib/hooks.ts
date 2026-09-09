@@ -74,6 +74,47 @@ export function usePrefersReducedMotion(): boolean {
   return reduced;
 }
 
+/**
+ * Current color theme ("light" | "dark"), driven by the .dark class on
+ * <html> that the pre-hydration inline script in app/layout.tsx sets.
+ * SSR-safe: always starts "light" and syncs after mount, so server and
+ * client HTML match (the <html> element itself is suppressHydrationWarning).
+ */
+export function useTheme(): {
+  theme: "light" | "dark";
+  toggle: () => void;
+} {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const sync = () =>
+      setTheme(
+        document.documentElement.classList.contains("dark") ? "dark" : "light"
+      );
+    sync();
+    // Keep in sync if the class is changed elsewhere (e.g. another tab).
+    const observer = new MutationObserver(sync);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const toggle = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    document.documentElement.classList.toggle("dark", next === "dark");
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      /* storage unavailable — class toggle still applies for this visit */
+    }
+    setTheme(next);
+  };
+
+  return { theme, toggle };
+}
+
 /** Lightweight WebGL support detection. */
 export function detectWebGL(): boolean {
   if (typeof window === "undefined") return false;
