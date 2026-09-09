@@ -1,0 +1,138 @@
+.portfolio-shell {
+  min-height: 100vh;
+  padding: 32px clamp(16px, 4vw, 56px) 56px;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.hero {
+  max-width: 1080px;
+  margin: 0 auto 24px;
+  padding: 28px;
+  border-radius: 14px;
+  background: linear-gradient(110deg, #0b1531, #1e293b);
+  border: 1px solid #334155;
+}
+
+.badge {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #1d4ed8;
+  color: #dbeafe;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  letter-spacing: 0.04em;
+}
+
+.subtitle,
+.meta {
+  margin: 8px 0 0;
+  color: #cbd5e1;
+}
+
+.control-panel {
+  max-width: 1080px;
+  margin: 0 auto 24px;
+  padding: 22px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: #111b35;
+}
+
+.control-panel h2 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.control-panel p {
+  margin: 0 0 14px;
+  color: #94a3b8;
+}
+
+.controls-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.toggle-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #475569;
+  border-radius: 999px;
+  background: #0b1328;
+  font-size: 0.9rem;
+}
+
+.portfolio-grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+
+.portfolio-section {
+  padding: 22px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: #0b1328;
+}
+
+.portfolio-section h3 {
+  margin: 0 0 14px;
+  font-size: 1.15rem;
+  color: #bfdbfe;
+}
+
+.card-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.info-card {
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #111b35;
+}
+
+.info-card h4 {
+  margin: 0 0 4px;
+  color: #f8fafc;
+}
+
+.card-meta {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.info-card p {
+  margin: 10px 0 0;
+  line-height: 1.55;
+}
+
+.info-card ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+a {
+  color: #93c5fd;
+}
+
+a:hover {
+  color: #dbeafe;
+}
